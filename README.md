@@ -4,6 +4,7 @@
 
 ## 框架
 
+```
 ├─data
 │  ├─test
 │  │      test.tsv
@@ -21,6 +22,9 @@
     │
     └─templates
             test_index.html
+```
+
+
 
 **data 太大自己将数据按照框架放入 test_raw 可用代码生成，还未整理完毕**
 
