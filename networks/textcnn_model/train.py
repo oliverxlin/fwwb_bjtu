@@ -21,7 +21,7 @@ sequence_len = 20
 batch_size = 512 
 
 # 迭代次数
-epochs = 10
+epochs = 30
 
 is_training = True
 
@@ -109,7 +109,7 @@ def train(x_train, y_train, x_dev, y_dev):
               cnn.input_y1: y_batch1,
               cnn.input_y2: y_batch2,
               cnn.input_y3: y_batch3,
-              cnn.keep_prob: 0.8
+              cnn.keep_prob: 0.9
             }
 
 #         三个标签单独的准确率， 一起的准确率共四个准确率
@@ -177,12 +177,12 @@ def train(x_train, y_train, x_dev, y_dev):
                 dev_step(x_dev, y_dev)
 
 if __name__ == '__main__':
-    data = pd.read_csv('../data/train/processed_datay', sep=',')
+    data = pd.read_csv("../../data/train/processed_datay", sep=',')
     data = data[['label1', 'label2', 'label3']]
-    data_x = np.load("../data/train/processed_datax.npy")
+    data_x = np.load("../../data/train/processed_datax.npy")
     data["ids"] = data_x
 
-    train_data = data.sample(frac= 0.2).reset_index()
+    train_data = data.sample(frac= 0.8).reset_index()
     test = data.sample(frac= 0.2).reset_index()
 
     train_y = train_data[['label1', 'label2', 'label3']]

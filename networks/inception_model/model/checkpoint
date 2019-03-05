@@ -1,0 +1,3 @@
+model_checkpoint_path: "inception_model-18680"
+all_model_checkpoint_paths: "inception_model-18640"
+all_model_checkpoint_paths: "inception_model-18680"
