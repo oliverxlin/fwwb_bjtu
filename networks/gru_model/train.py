@@ -21,7 +21,7 @@ sequence_len = 20
 batch_size = 256 
 
 # 迭代次数
-epochs = 1
+epochs = 50
 
 is_training = True
 
@@ -175,12 +175,12 @@ def train(x_train, y_train, x_dev, y_dev):
                 dev_step(x_dev, y_dev)
 
 if __name__ == '__main__':
-    data = pd.read_csv('../data/train/processed_datay', sep=',')
+    data = pd.read_csv('../../data/train/processed_datay', sep=',')
     data = data[['label1', 'label2', 'label3']]
-    data_x = np.load("../data/train/processed_datax.npy")
+    data_x = np.load("../../data/train/processed_datax.npy")
     data["ids"] = data_x
 
-    train_data = data.sample(frac= 0.2).reset_index()
+    train_data = data.sample(frac= 0.8).reset_index()
     test = data.sample(frac= 0.2).reset_index()
 
     train_y = train_data[['label1', 'label2', 'label3']]
