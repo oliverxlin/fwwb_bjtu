@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Test</title>
+    <script src="/static/js/jquery.min.js" type="text/javascript"></script>
+</head>
+<body>
+    <input  id = "input" type="text"  placeholder="商品名"/>
+    <button class = "sub">提交</button>
+</body>
+<script>
+    $('.sub').on('click', function(e) {
+                    var name = $("input").val();
+                    $.ajax({
+                        url:"/query",
+                        type:"post",
+                        data:{"name" : name},
+                        dataType:"json",
+                        success:function(result){
+                               alert(result.ans);
+                        }
+                        })
+                    });                
+            </script>
+</html>

@@ -40,7 +40,7 @@ embedding_dims = 24
 num_filters = 4
 
 # filter 的大小
-filter_size = [1, 2, 3, 4, 5]
+filter_size = [ 2, 3, 4]
 
 # 三个标签的类数
 num_classes = [22, 191, 1192]
@@ -94,9 +94,15 @@ if __name__ == '__main__':
 
 
     # 先生成唯一数组
-    y_label1 = data['label1'].unique().tolist()
-    y_label2 = data['label2'].unique().tolist()
-    y_label3 = data['label3'].unique().tolist()
+    y_label1 = []
+    y_label2 = []
+    y_label3 = []
+    with open("../../data/label1.txt","r") as f:
+        y_label1 = f.read().split(' ')
+    with open("../../data/label2.txt","r") as f:
+        y_label2 = f.read().split(' ')
+    with open("../../data/label3.txt","r") as f:
+        y_label3 = f.read().split(' ')
 
     # 获取在唯一数组中的索引(训练集和测试集各有3个标签需要处理)
     train_y_label1_map = train_y['label1'].apply(lambda x: y_label1.index(x))
@@ -118,3 +124,4 @@ if __name__ == '__main__':
     y_test = [test_y_label1_one_hot,test_y_label2_one_hot,test_y_label3_one_hot]
     predict(train_x)
     print(np.argmax(train_y_label1_one_hot, axis = 1))
+    print(y_label1[np.argmax(train_y_label1_one_hot, axis = 1)])

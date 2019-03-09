@@ -15,7 +15,7 @@ FLAGS = tf.flags.FLAGS
 max_features = 1192
 
 # 句子填充的长度
-sequence_len = 20
+sequence_len = 24
 
 # batch 大小
 batch_size = 512 
@@ -29,7 +29,7 @@ is_training = True
 embedding_dims = 24
 
 # gru  的filters
-num_filters = 4
+num_filters = 10
 
 # filter 的大小
 filter_size = [1, 2, 3, 4, 5]
@@ -191,15 +191,21 @@ if __name__ == '__main__':
     train_x = train_data["ids"]
     test_x = test["ids"]
 
-    train_x = sequence.pad_sequences(train_x, maxlen=20)
-    test_x  = sequence.pad_sequences(test_x, maxlen=20) 
+    train_x = sequence.pad_sequences(train_x, maxlen=sequence_len)
+    test_x  = sequence.pad_sequences(test_x, maxlen=sequence_len) 
 
 
 
     # 先生成唯一数组
-    y_label1 = data['label1'].unique().tolist()
-    y_label2 = data['label2'].unique().tolist()
-    y_label3 = data['label3'].unique().tolist()
+    y_label1 = []
+    y_label2 = []
+    y_label3 = []
+    with open("../../data/label1.txt","r") as f:
+        y_label1 = f.read().split(' ')
+    with open("../../data/label2.txt","r") as f:
+        y_label2 = f.read().split(' ')
+    with open("../../data/label3.txt","r") as f:
+        y_label3 = f.read().split(' ')
 
     # 获取在唯一数组中的索引(训练集和测试集各有3个标签需要处理)
     train_y_label1_map = train_y['label1'].apply(lambda x: y_label1.index(x))

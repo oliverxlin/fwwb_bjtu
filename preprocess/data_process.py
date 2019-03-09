@@ -9,6 +9,7 @@ from gensim.models.word2vec import Word2Vec
 from keras.preprocessing import sequence
 from keras.preprocessing.text import *
 from keras.preprocessing import sequence
+
 tokenizer_dit_dir = "tok_dir"
 # 替换一些字符 类似于 （ ） ‘ ’ _
 def  rm_punc(strs):
@@ -59,6 +60,27 @@ def word_tokenizer(data, update_index = False):
             f.write(json.dumps(tok.word_index))
         data_tok = tok.texts_to_sequences(data)
     return data_tok
+def savelabel():
+    label = pd.read_csv('../data/train/processed_datay', sep=',')
+    label = label[['label1', 'label2', 'label3']]
+
+    # 先生成唯一数组
+    y_label1 = label['label1'].unique().tolist()
+    y_label2 = label['label2'].unique().tolist()
+    y_label3 = label['label3'].unique().tolist()
+    y_label1.sort()
+    y_label2.sort()
+    y_label3.sort()
+
+
+    with open("../data/label1.txt", "w") as f:
+        f.write(" ".join(y_label1))
+
+    with open("../data/label2.txt", "w") as f:
+        f.write(" ".join(y_label2))
+
+    with open("../data/label3.txt", "w") as f:
+        f.write(" ".join(y_label3))
 
 def process_data(data):
     data = shuffle(data)
@@ -96,6 +118,4 @@ if __name__ == '__main__':
     # 替换无用字符
     data[features[0]]  = data[features[0]].apply(rm_punc)
     process_data(data)
-    # print(data.iloc[0:10])
-    # arr3 = np.load('./array.npy')
-    # print(arr3.tolist())
+    savelabel()

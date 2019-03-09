@@ -30,7 +30,7 @@ class InceptionModel(object):
         self.batch_size = batch_size
         self.hidden_size = hidden_size
         self.num_filters = num_filters
-        with tf.name_scope("Inputs"):
+        with tf.name_scope("Input"):
             self.input_x = tf.placeholder(tf.int32, [None, sequence_length], name="input_x")
             self.input_y1 = tf.placeholder(tf.float32, [None, num_classes[0]], name="input_y1")
             self.input_y2 = tf.placeholder(tf.float32, [None, num_classes[1]], name="input_y2")

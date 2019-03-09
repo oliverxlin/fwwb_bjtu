@@ -1,5 +1,0 @@
-model_checkpoint_path: "inception_model-39000"
-all_model_checkpoint_paths: "inception_model-38880"
-all_model_checkpoint_paths: "inception_model-38920"
-all_model_checkpoint_paths: "inception_model-38960"
-all_model_checkpoint_paths: "inception_model-39000"

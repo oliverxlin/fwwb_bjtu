@@ -71,9 +71,9 @@ def predict(x_predict):
             
             print(predictions1)
 if __name__ == '__main__':
-    data = pd.read_csv('../data/train/processed_datay', sep=',')
+    data = pd.read_csv('../../data/train/processed_datay', sep=',')
     data = data[['label1', 'label2', 'label3']]
-    data_x = np.load("../data/train/processed_datax.npy")
+    data_x = np.load("../../data/train/processed_datax.npy")
     data["ids"] = data_x
 
     # train_data = data.sample(frac= 0.1).reset_index()
@@ -92,9 +92,15 @@ if __name__ == '__main__':
 
 
     # 先生成唯一数组
-    y_label1 = data['label1'].unique().tolist()
-    y_label2 = data['label2'].unique().tolist()
-    y_label3 = data['label3'].unique().tolist()
+    y_label1 = []
+    y_label2 = []
+    y_label3 = []
+    with open("../../data/label1.txt","r") as f:
+        y_label1 = f.read().split(' ')
+    with open("../../data/label2.txt","r") as f:
+        y_label2 = f.read().split(' ')
+    with open("../../data/label3.txt","r") as f:
+        y_label3 = f.read().split(' ')
 
     # 获取在唯一数组中的索引(训练集和测试集各有3个标签需要处理)
     train_y_label1_map = train_y['label1'].apply(lambda x: y_label1.index(x))

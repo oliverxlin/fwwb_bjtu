@@ -21,7 +21,7 @@ sequence_len = 20
 batch_size = 512 
 
 # 迭代次数
-epochs = 40
+epochs = 20
 
 is_training = True
 
@@ -169,6 +169,7 @@ def train(x_train, y_train, x_dev, y_dev):
             loss_sum, acc_sum = train_step(x_batch, y_batch1, y_batch2, y_batch3,  loss_sum, acc_sum, 40)
             current_step = tf.train.global_step(sess, global_step)
             if current_step % 200 == 0:
+                print("Evaluation:")
                 dev_step(x_dev, y_dev)
 
 if __name__ == '__main__':
@@ -192,9 +193,15 @@ if __name__ == '__main__':
 
 
     # 先生成唯一数组
-    y_label1 = data['label1'].unique().tolist()
-    y_label2 = data['label2'].unique().tolist()
-    y_label3 = data['label3'].unique().tolist()
+    y_label1 = []
+    y_label2 = []
+    y_label3 = []
+    with open("../../data/label1.txt","r") as f:
+        y_label1 = f.read().split(' ')
+    with open("../../data/label2.txt","r") as f:
+        y_label2 = f.read().split(' ')
+    with open("../../data/label3.txt","r") as f:
+        y_label3 = f.read().split(' ')
 
     # 获取在唯一数组中的索引(训练集和测试集各有3个标签需要处理)
     train_y_label1_map = train_y['label1'].apply(lambda x: y_label1.index(x))
